@@ -26,6 +26,9 @@ def isUnique(str):
 		
 	
 def main():
+	if len(sys.argv) != 2:
+		print "Usage: python UniqueLetters.py yourstring"
+		return
 	print "{0} is the answer for string {1}".format(isUnique(sys.argv[1]), sys.argv[1])
 
 main()	
