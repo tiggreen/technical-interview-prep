@@ -44,6 +44,7 @@ def append(lst, data):
 		while not isinstance(tempHead.next, EmptyNode):
 			tempHead = tempHead.next
 		tempHead.next = mkNode(data, mkEmptyNode())
+	lst.size += 1 
 
 #print the linkedlist
 def printList(lst):
@@ -53,15 +54,40 @@ def printList(lst):
 		curr = curr.next
 	
 
-#deleteNode. Finds the node with 'data' data and removes it from the list.
+"""
+deleteNode. Finds the node with 'data' data and removes it from the list.
+"""
 def deleteNode(lst, data):
-	pass
+	curr = lst.head
+	
+	if curr.data == data:
+		lst.size -= 1 
+		#moved head
+		lst.head = lst.head.next
+		return lst
+	
+	while not isinstance(curr.next, EmptyNode):
+		if curr.next.data == data:
+			# head didn't change.
+			curr.next = curr.next.next
+			lst.size -= 1 
+			return lst.head
+			
+		curr = curr.next
+		
 	
 def main():
 	l = mkLinkedList()
 	append(l, 12)
 	append(l,22)
+	append(l,44)
 	append(l, 33)
+	deleteNode(l,22)
+	# deleteNode(l,12)
+	# deleteNode(l,33)
+	deleteNode(l,44)
+	append(l,7)
+	append(l, 8)
 	printList(l)
 
 		
