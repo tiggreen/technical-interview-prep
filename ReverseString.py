@@ -16,10 +16,10 @@ def reverseString(str):
 	
 def main():
 	if len(sys.argv) != 2:
-		print "Usage: ReverseString.py yourstring"
+		print("Usage: ReverseString.py yourstring")
 		return
 		
 	str = sys.argv[1]
-	print reverseString(str)
+	print(reverseString(str))
 
 main()

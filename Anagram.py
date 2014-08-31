@@ -19,6 +19,6 @@ def main():
 		raw_input("Usage: python Anagram.py str1 str2")
 		return 
 		
-	print isAnagramSorted(sys.argv[1], sys.argv[2])
+	print(isAnagramSorted(sys.argv[1], sys.argv[2]))
 	
 main()
