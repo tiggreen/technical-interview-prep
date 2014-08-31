@@ -55,6 +55,7 @@ def printList(lst):
 
 #deleteNode. Finds the node with 'data' data and removes it from the list.
 def deleteNode(lst, data):
+	pass
 	
 def main():
 	l = mkLinkedList()
