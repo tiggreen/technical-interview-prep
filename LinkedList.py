@@ -1,7 +1,7 @@
 """
 author @tiggreen 
 
-LinkedList class with its methods.
+Single LinkedList class with its methods.
 
 It's always great to code all data structures from scratch.
 We start from LinkedList as it's the most common data structure
@@ -75,6 +75,37 @@ def deleteNode(lst, data):
 			
 		curr = curr.next
 		
+#Do delete and insert operations for doubly linkedList
+"""
+There a couple cases:
+1. Deleted node is the head
+2. Deleted node is the last node
+3. Deleted node a middle node
+
+Or 
+Insert a node in a give position of a singly linked list. 
+def insertAt(lst, data, i)
+"""
+def insertAt(lst, data, i):
+	
+	curr = lst.head
+	if i < 0 or i > lst.size:
+		return lst
+	elif i == 0:
+		lst.head = mkNode(data, lst.head)
+		return lst
+	else:
+		pos = 0
+		while pos != i - 1:
+			curr = curr.next
+			pos += 1
+		temp = curr.next
+		curr.next = mkNode(data, temp)
+		return lst
+		
+	
+		
+		
 	
 def main():
 	l = mkLinkedList()
@@ -88,6 +119,7 @@ def main():
 	deleteNode(l,44)
 	append(l,7)
 	append(l, 8)
+	insertAt(l, 777, 3)
 	printList(l)
 
 		
