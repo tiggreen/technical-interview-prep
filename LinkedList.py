@@ -9,6 +9,7 @@ to be asked during tech inteviews.
 
 """
 from Node import *
+from DNode import *
 
 class LinkedList():
 	
@@ -77,10 +78,9 @@ def deleteNode(lst, data):
 		
 #Do delete and insert operations for doubly linkedList
 """
-There a couple cases:
+There're 2 cases:
 1. Deleted node is the head
-2. Deleted node is the last node
-3. Deleted node a middle node
+2. The other case. 
 
 Or 
 Insert a node in a give position of a singly linked list. 
@@ -102,11 +102,30 @@ def insertAt(lst, data, i):
 		temp = curr.next
 		curr.next = mkNode(data, temp)
 		return lst
+
+#appendAt for a doubly linked List
+def appendAt(lst, data, i):
+	curr = lst.head
+	if i < 0 or i > lst.size:
+		return lst
+	elif i == 0:
+		lst.head = mkDNode(data, lst.head, mkEmptyNode())
+		lst.size += 1 
+		return lst
+	else:
+		pos = 0
+		while pos != i - 1:
+			curr = curr.next
+			pos += 1
+		temp = curr.next
+		n = mkDNode(data, temp, curr)
+		curr.next  = n
+		if not isinstance(temp, EmptyNode):
+			temp.prev = n
+		lst.size += 1 
+		return lst
 		
-	
-		
-		
-	
+
 def main():
 	l = mkLinkedList()
 	append(l, 12)
@@ -114,15 +133,17 @@ def main():
 	append(l,44)
 	append(l, 33)
 	deleteNode(l,22)
-	# deleteNode(l,12)
-	# deleteNode(l,33)
 	deleteNode(l,44)
-	append(l,7)
-	append(l, 8)
-	insertAt(l, 777, 3)
+	insertAt(l, 777, 0)
 	printList(l)
+	print()
+	dl = mkLinkedList()
+	appendAt(dl, 24, 0)
+	appendAt(dl, 55, 1)
+	appendAt(dl, 77, 2)
+	printList(dl)
 
-		
+#if __name__ == "__main__":		
 main()
 
 
