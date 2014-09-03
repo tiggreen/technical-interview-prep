@@ -124,18 +124,52 @@ def appendAt(lst, data, i):
 			temp.prev = n
 		lst.size += 1 
 		return lst
-		
-
+"""
+Write code to remove duplicates from an unsorted linked list. 
+FOLLOW UP
+How would you solve this problem if a temporary buffer is not allowed?
+I think we can keep two pointers and do in place removal. O(n2)
+"""
+#this function uses a temporary buffer.
+def removeDuplicates(lst):
+	#corner case
+	if isinstance(lst.head, EmptyNode):
+		return lst 
+	curr = lst.head
+	d = dict()
+	res = mkLinkedList()
+	while not isinstance(curr, EmptyNode):
+		#hashtable doesn't contain the node data.
+		if curr.data not in d.keys():
+			d[curr.data] = True
+			append(res,curr.data)
+		curr = curr.next
+	return res
+	
+def removeNthLast(lst, n):
+	pnt1 = lst.head
+	pnt2 = lst.head
+	currPos = 0
+	while not isinstance(pnt1.next, EmptyNode):
+		pnt1 = pnt1.next
+		currPos += 1
+		#please note that this should be >= not ==.
+		if currPos >= n:
+			pnt2 = pnt2.next
+	print("The node that should be removed has a data {}.".format(pnt2.data))
+	return lst
+	
 def main():
 	l = mkLinkedList()
-	append(l, 12)
-	append(l,22)
-	append(l,44)
-	append(l, 33)
-	deleteNode(l,22)
-	deleteNode(l,44)
-	insertAt(l, 777, 0)
-	printList(l)
+	append(l, 4)
+	append(l,1)
+	append(l,2)
+	append(l, 7)
+	removeNthLast(l, 2)
+	deleteNode(l,1)
+	deleteNode(l,3)
+	nd = removeDuplicates(l)
+	printList(nd)
 	print()
 	dl = mkLinkedList()
 	appendAt(dl, 24, 0)
@@ -143,7 +177,9 @@ def main():
 	appendAt(dl, 77, 2)
 	printList(dl)
 
-#if __name__ == "__main__":		
-main()
+#this can be handy when you want to import this module. 
+# So in case if you import main won't be imported. 
+if __name__ == "__main__":
+	main()
 
 
