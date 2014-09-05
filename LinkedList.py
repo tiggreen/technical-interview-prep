@@ -158,24 +158,35 @@ def removeNthLast(lst, n):
 			pnt2 = pnt2.next
 	print("The node that should be removed has a data {}.".format(pnt2.data))
 	return lst
+
+def reverseLinkedList(lst):
+	if isinstance(lst.head, EmptyNode):
+		return lst
+		
+	curr = lst.head
+	prev = mkEmptyNode()
 	
+	while not isinstance(curr, EmptyNode):
+		temp = curr.next
+		curr.next = prev
+		prev = curr
+		curr = temp
+	
+	lst.head = prev
+		
+	return lst
+
+			
 def main():
 	l = mkLinkedList()
-	append(l, 4)
-	append(l,1)
-	append(l,2)
-	append(l, 7)
-	removeNthLast(l, 2)
-	deleteNode(l,1)
-	deleteNode(l,3)
-	nd = removeDuplicates(l)
-	printList(nd)
-	print()
-	dl = mkLinkedList()
-	appendAt(dl, 24, 0)
-	appendAt(dl, 55, 1)
-	appendAt(dl, 77, 2)
-	printList(dl)
+	append(l, 5)
+	append(l,10)
+	append(l,7)
+	append(l, 3)
+	append(l, 1)
+
+	reverseLinkedList(l)
+	printList(l)
 
 #this can be handy when you want to import this module. 
 # So in case if you import main won't be imported. 
