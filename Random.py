@@ -20,8 +20,10 @@ def decToBinary(n):
 
 # My name is Tigran" --> "Tigran is name my"
 # Will be imlemented in place and recursive
-# def reverseWordsInPlace(str):
-# 	pass
+def reverseWordsInPlace(str):
+	if len(str.split()) == 1:
+		return str
+	return str.split()[-1] + " " + reverseWordsInPlace(' '.join(str.split()[:-1]))
 
 """
 [1, 2, 3], [4, 5, 6, 7] ==> [1, 2, 3, 4, 5, 6, 7]
@@ -62,7 +64,8 @@ def main():
 	# n = int(input("n: "))
 	a = [1,2,3,11,18,25]
 	b = [4,5,6,7,12,19,24]
-	print(mergeSortedLists(a,b))
+	str = "My name is Tigran"
+	print(reverseWordsInPlace(str))
 
 
 main()
