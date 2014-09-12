@@ -58,14 +58,30 @@ def mergeSortedLists(lst1,lst2):
 	return resultList
 	# there might be some leftover elements in lists so let's
 	# check it out. 
-		 
+	
+# let's try to find the data in the given list.	 
+# Returns true if we can find the data.
+def binarySearchRec(lst, data):
+	if lst == []:
+		return False
+		
+	midInd = (int)(len(lst)/2)
+	
+	if lst[midInd] == data:
+		return True
+	if data < lst[midInd]:
+		return binarySearchRec(lst[:midInd], data)
+	elif data > lst[midInd]:
+		return binarySearchRec(lst[midInd+1:], data)
+		
 	
 def main():
 	# n = int(input("n: "))
 	a = [1,2,3,11,18,25]
 	b = [4,5,6,7,12,19,24]
 	str = "My name is Tigran"
-	print(reverseWordsInPlace(str))
+	print(binarySearchRec(a, 11))
+	# print(reverseWordsInPlace(str))
 
 
 main()
