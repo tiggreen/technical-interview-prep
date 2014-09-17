@@ -73,14 +73,63 @@ def binarySearchRec(lst, data):
 		return binarySearchRec(lst[:midInd], data)
 	elif data > lst[midInd]:
 		return binarySearchRec(lst[midInd+1:], data)
-		
+"""
+Find all the combinations of a string in lowercase and 
+uppercase. 
+For example, string "ab" -> "ab", "Ab", "aB", "AB".
+"""		
+def allCombinations(st):
+	pass
+
+"""
+Returns all the permutations of the string.
+E.g. "abc" => "abc", "acb", "bac", "bca", "cab", "cba" 
+"""
+
+def getAllPermutations(st):
+	perms = []
+	if st == None:
+		return st
+	# the base case. 
+	if len(st) == 0:
+		perms.append('')
+		return perms
+	else:
+		first = st[0]
+		remainder = st[1:]
+
+		words = getAllPermutations(remainder)
+		for w in words:
+			for i in range(len(w)+1):
+				perms.append(insertCharAt(w, first,i))
+		return perms
+
+def insertCharAt(st, f, pos):
+	result = st[:pos] + f + st[pos:]
+	return result
+
+# ls = [a,b] => [[], a, b, [a,b]]
+def getPowerSet(ls):
+	allSubsets = []
+	sz = 1 << len(ls)
+	for counter in range(sz):
+		tempSubset  = []
+		for j in range(len(ls)):
+			if (counter & 1 << j) > 0:
+				tempSubset.append(ls[j])
+		allSubsets.append(tempSubset)
+	return allSubsets
+	
 	
 def main():
 	# n = int(input("n: "))
 	a = [1,2,3,11,18,25]
 	b = [4,5,6,7,12,19,24]
 	str = "My name is Tigran"
-	print(binarySearchRec(a, 11))
+	#res = getAllPermutations("ABC")
+	ls = ["a","b", "c"]
+	print(getPowerSet(ls))
+	#print(res)
 	# print(reverseWordsInPlace(str))
 
 

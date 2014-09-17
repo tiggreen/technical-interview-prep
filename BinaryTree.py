@@ -190,7 +190,10 @@ class Tree():
 		
 		return min(leftMin, rightMin)
 	
-	def findLCA(root, data1, data2):
+	def lcaBST(root, data1, data2):
+		pass
+		
+	def lcaBT(root, data1, data2):
 		pass
 	
 
