@@ -120,7 +120,26 @@ def getPowerSet(ls):
 		allSubsets.append(tempSubset)
 	return allSubsets
 	
-	
+"""
+Finding pair of numbers in a list that add to given sum.
+a = [1,3,4,6,12,16,19, 10]
+findPairSum(a, 28) => (12,16)
+key : sum - x, value y
+"""
+def findPairSum(lst, sm):
+	if not lst:
+		return lst
+	d = dict()
+	result = []
+	for i in lst:
+		if i not in d:
+			d[sm - i] = i
+		else:
+			key = sm - i
+			result.append((key,i))
+			
+	return result
+
 def main():
 	# n = int(input("n: "))
 	a = [1,2,3,11,18,25]
@@ -128,8 +147,10 @@ def main():
 	str = "My name is Tigran"
 	#res = getAllPermutations("ABC")
 	ls = ["a","b", "c"]
-	print(getPowerSet(ls))
-	#print(res)
+	#print(getPowerSet(ls))
+	lst = [1,3,4,6,12,16,19, 10,9]
+	# should return (12, 16)
+	print(findPairSum(lst, 10))
 	# print(reverseWordsInPlace(str))
 
 
