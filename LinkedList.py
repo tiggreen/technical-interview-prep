@@ -154,7 +154,50 @@ def removeDuplicates(lst):
         curr = curr.next
     return res
 
+def removeDuplInPlace(lst):
+	
+	if isinstance(lst.head, EmptyNode):
+		return lst
+		
+	prev = lst.head
+	curr = prev.next
+	
+	while not isinstance(curr, EmptyNode):
+		runner = lst.head
+		while runner != curr:
+			if runner.data == curr.data:
+				tmp  = curr.next
+				prev.next = tmp
+				curr = tmp
+				break	
+			runner = runner.next	
+		#current not updated
+		if runner == curr:
+			prev = curr
+			curr = curr.next	
+	return lst
+		
 
+#1 -> 2 -> 2-> 3 -> 2 -> 5 => 1 -> 2 -> 3 -> 2 -> 5
+def removeSeqDuplInplace(lst):
+	if lst == None:
+		return None
+	
+	prev = lst.head
+	curr = prev.next
+	
+	while not isinstance(curr, EmptyNode):
+		
+		while curr.data == prev.data:
+			curr = curr.next
+		
+		prev = curr.next
+		curr = curr.next
+		
+	return lst
+	
+	
+	
 def removeNthLast(lst, n):
     pnt1 = lst.head
     pnt2 = lst.head
@@ -189,14 +232,14 @@ def reverseLinkedList(lst):
 
 def main():
     l = mkLinkedList()
-    append(l, 5)
-    append(l, 10)
-    append(l, 7)
     append(l, 3)
-    append(l, 1)
+    append(l, 4)
+    append(l, 4)
+    append(l, 3)
+    append(l, 10)
 
-    reverseLinkedList(l)
-    printList(l)
+    ls = removeSeqDuplInplace(l)
+    printList(ls)
 
 #this can be handy when you want to import this module. 
 # So in case if you import main won't be imported. 

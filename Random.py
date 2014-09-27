@@ -73,13 +73,6 @@ def binarySearchRec(lst, data):
 		return binarySearchRec(lst[:midInd], data)
 	elif data > lst[midInd]:
 		return binarySearchRec(lst[midInd+1:], data)
-"""
-Find all the combinations of a string in lowercase and 
-uppercase. 
-For example, string "ab" -> "ab", "Ab", "aB", "AB".
-"""		
-def allCombinations(st):
-	pass
 
 """
 Returns all the permutations of the string.
@@ -115,6 +108,7 @@ def getPowerSet(ls):
 	for counter in range(sz):
 		tempSubset  = []
 		for j in range(len(ls)):
+			print(counter)
 			if (counter & 1 << j) > 0:
 				tempSubset.append(ls[j])
 		allSubsets.append(tempSubset)
@@ -140,18 +134,42 @@ def findPairSum(lst, sm):
 			
 	return result
 
+def getAllPerms(st):
+	perms = []
+	
+	if st == '':
+		perms.append('')
+		return perms 
+	
+	firstChars = st[:-1]
+	lastChar = st[-1]
+	allPerms = getAllPerms(firstChars)
+	
+	for s in allPerms:
+		for i in range(len(s) + 1):
+			temp = insertCharAt(s, lastChar, i)
+			perms.append(temp)
+				
+	return perms
+	
+		
 def main():
 	# n = int(input("n: "))
 	a = [1,2,3,11,18,25]
 	b = [4,5,6,7,12,19,24]
 	str = "My name is Tigran"
 	#res = getAllPermutations("ABC")
-	ls = ["a","b", "c"]
+	ls = ["a","b"]
 	#print(getPowerSet(ls))
-	lst = [1,3,4,6,12,16,19, 10,9]
+	#lst = [1,3,4,6,12,16,19, 10,9]
 	# should return (12, 16)
-	print(findPairSum(lst, 10))
-	# print(reverseWordsInPlace(str))
+	#print(findPairSum(lst, 10))
+	st = "My name is Tigran"
+	#print(reverseWordsInPlace(str))
+	s = "abc"
+
+	print(getAllPerms(s))
+	
 
 
 main()
