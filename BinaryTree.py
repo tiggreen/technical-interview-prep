@@ -1,15 +1,16 @@
 # @tigreen
 
 """
- A class representing a Binary Tree (BT). Max 2 children. 
+ A class representing a Binary Tree (BT). Max 2 children.
+ Has a pointer to its parent as well. 
 """
 
 # A class representing a tree node. 
 class TreeNode():
-    def __init__(self, data, left, right):
-        self.data = data
-        self.left = left
-        self.right = right
+	def __init__(self, data, left, right):
+		self.data = data
+		self.left = left
+		self.right = right
 
 
 # A class represeting a binary tree class which consists of TreeNode objects.
@@ -182,29 +183,16 @@ class Tree():
         return max(leftMax, rightMax)
 
     # the miniumum depth of the tree.
-    def minDepth(self, root):
-        if root == None:
-            return -1
-
-        leftMin = 1 + self.minDepth(root.left)
-        rightMin = 1 + self.minDepth(root.right)
-
-        return min(leftMin, rightMin)
-
-    def lcaBST(root, data1, data2):
-        pass
-
-    def lcaBT(root, data1, data2):
-        pass
+	def minDepth(self, root):
+		if root == None:
+			return -1
 		
-	def dfs(self, root):
-		pass
-	
-	# breadth-first search or level by level.
-	def bfs(self, root):
-		pass
+		leftMin = 1 + self.minDepth(root.left)
+		rightMin = 1 + self.minDepth(root.right)
 		
-	# Depth first search on a graph. 
+		return min(leftMin, rightMin)
+		
+	#Depth first search on a graph. 
 	def dfs(self, root):
 		if root == None:
 			return root
@@ -214,6 +202,7 @@ class Tree():
 		for each n node that is root.adjacent:
 			if n.isVisited == False:
 				dfs(n)
+				
 			
 def main():
     root = TreeNode(15, None, None)

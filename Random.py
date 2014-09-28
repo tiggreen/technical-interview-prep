@@ -151,6 +151,29 @@ def getAllPerms(st):
 			perms.append(temp)
 				
 	return perms
+
+# Print all valid combinations of n-pairs of parentheses.
+def printAllParens(cnt):
+	st = ['' for i in range(cnt*2)]
+	return printAllParensUtil(cnt, cnt, 0, st)
+	
+def printAllParensUtil(left, right, cnt, st):
+	
+	if left < 0 or left > right:
+		return 
+	if left == 0 and right == 0:
+		print(st)
+	else:
+		if left > 0:
+			st[cnt] = '('
+			printAllParensUtil(left-1, right, cnt+1, st)
+			
+		if right > left:
+			st[cnt] = ')'
+			printAllParensUtil(left, right-1, cnt+1, st)
+	
+	
+	
 	
 		
 def main():
@@ -167,8 +190,9 @@ def main():
 	st = "My name is Tigran"
 	#print(reverseWordsInPlace(str))
 	s = "abc"
+	
 
-	print(getAllPerms(s))
+	print(printAllParens(3))
 	
 
 

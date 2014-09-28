@@ -52,12 +52,25 @@ def printGrid(grid):
 	for i in range(len(grid)):
 		print(grid[i])	
 	
-	print()		
+	print()
+
+#Returns the i-th fibonacci number. DP.
+buf = [0 for i in range(10000)]
+def fib(i):
+	if i == 0:
+		return 0
+	if i == 1:
+		return 1
+	if buf[i] != 0:
+		return buf[i]
+	buf[i] = fib(i-1) + fib(i-2)
+	return buf[i]	
 
 	
 def main():
-	grid = [[3,2,1],[1,1,2],[2,1,1]]
-	printGrid(grid)
-	print(getFastestPath(grid))
+	#grid = [[3,2,1],[1,1,2],[2,1,1]]
+	#printGrid(grid)
+	#print(getFastestPath(grid))
+	print(fib(100))
 
 main()
