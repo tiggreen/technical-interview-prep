@@ -171,29 +171,53 @@ def printAllParensUtil(left, right, cnt, st):
 		if right > left:
 			st[cnt] = ')'
 			printAllParensUtil(left, right-1, cnt+1, st)
-	
-	
-	
-	
+
+#Calculate x raised to the power n */
+def pow(x,n):
+	if n == 0:
+		return 1
+	elif n % 2 == 0:
+		return pow(x, n//2)*pow(x, n//2)
+	else:
+		return x*pow(x, n//2)*pow(x, n//2)
 		
+"""
+Given an input string and a dictionary of words, find out if
+the input string can be segmented into a space-separated sequence of 
+dictionary words. See following examples for more details.
+"""
+def wordBreak(st, dic):
+	#base case
+	if len(st) == 0:
+		return True
+	for i in range(1,len(st) + 1):
+		if st[0:i] in dic and wordBreak(st[i:len(st)-i], dic):
+			return True
+	return False
+
+"""
+"abcdbfa" => "cdbfa" (do this in place)
+Q: Do we want to remove first occurance chars or the second, or next?
+"""
+def removeDuplicates(st):
+	# let this be the base case
+	if st == "":
+		return st
+		
+	head = st[0]
+	tail = st[1:]
+	
+	if head in tail:
+		return removeDuplicates(tail)
+	else:
+		return head + removeDuplicates(tail)
+	
 def main():
-	# n = int(input("n: "))
-	a = [1,2,3,11,18,25]
-	b = [4,5,6,7,12,19,24]
-	str = "My name is Tigran"
-	#res = getAllPermutations("ABC")
-	ls = ["a","b"]
-	#print(getPowerSet(ls))
-	#lst = [1,3,4,6,12,16,19, 10,9]
-	# should return (12, 16)
-	#print(findPairSum(lst, 10))
-	st = "My name is Tigran"
-	#print(reverseWordsInPlace(str))
-	s = "abc"
+	# print(printAllParens(3))
+	# print(pow(2,5))
+	#dic = ['i', 'like', 'you','what', 'hey']
+	#print(wordBreak('i', dic))
+	print(removeDuplicates("abcdbfaffamnq"))
 	
-
-	print(printAllParens(3))
-	
-
-
-main()
+if __name__ == '__main__':
+	main()

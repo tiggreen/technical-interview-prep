@@ -48,7 +48,9 @@ class Employee(Person):
     # def vehicle_type():
     #     """"Return a string representing the type of vehicle this is."""
     #     pass
-
+	
+	def halve_evens_only(nums):
+		return [i/2 for i in nums if not i % 2]
 def main():
 	four_nones = [None] * 4
 	
@@ -67,6 +69,7 @@ def main():
 	a = [3, 4, 5, 12]
 	b = [i for i in a if i > 4]
 	print(b)
+	
 	
 	# with open('Node.py') as f:
 	# 	for line in f:
