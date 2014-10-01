@@ -200,6 +200,8 @@ def wordBreak(st, dic):
 Q: Do we want to remove first occurance chars or the second, or next?
 """
 def removeDuplicates(st):
+	if st == None:
+		return None
 	# let this be the base case
 	if st == "":
 		return st
@@ -217,7 +219,7 @@ def main():
 	# print(pow(2,5))
 	#dic = ['i', 'like', 'you','what', 'hey']
 	#print(wordBreak('i', dic))
-	print(removeDuplicates("abcdbfaffamnq"))
+	print(removeDuplicates("aaaa"))
 	
 if __name__ == '__main__':
 	main()

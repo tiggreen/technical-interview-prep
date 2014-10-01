@@ -202,6 +202,23 @@ class Tree():
 		for each n node that is root.adjacent:
 			if n.isVisited == False:
 				dfs(n)
+	
+	"""
+	Given a sorted(increasing order) array, write an algo to
+	create a binary tree with min height
+	"""
+	def creatMinBT(self, arr):
+		if arr == None:
+			return None
+			
+		middle = len(arr)//2
+		
+		root = TreeNode(arr[middle])
+		root.left = self.creatMinBT(arr[:middle])
+		root.right = self.createMinBT(arr[middle+1:])
+		
+		return root
+		
 				
 			
 def main():
