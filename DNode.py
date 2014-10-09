@@ -1,5 +1,5 @@
 """
-author @tiggreen 
+author @tiggreen
 
 Node class for Doubly linled list.
 """

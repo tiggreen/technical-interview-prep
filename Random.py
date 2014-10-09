@@ -13,7 +13,7 @@ def decToBinary(n):
 			ret.insert(0,0)
 		else:
 			ret.insert(0,1)
-		n = int(n/2)
+		n = n//2
 		
 	ret.insert(0,1)
 	return ret
@@ -65,7 +65,7 @@ def binarySearchRec(lst, data):
 	if lst == []:
 		return False
 		
-	midInd = (int)(len(lst)/2)
+	midInd = len(lst)//2
 	
 	if lst[midInd] == data:
 		return True
@@ -108,7 +108,6 @@ def getPowerSet(ls):
 	for counter in range(sz):
 		tempSubset  = []
 		for j in range(len(ls)):
-			print(counter)
 			if (counter & 1 << j) > 0:
 				tempSubset.append(ls[j])
 		allSubsets.append(tempSubset)
@@ -149,7 +148,7 @@ def getAllPerms(st):
 		for i in range(len(s) + 1):
 			temp = insertCharAt(s, lastChar, i)
 			perms.append(temp)
-				
+	print(perms)			
 	return perms
 
 # Print all valid combinations of n-pairs of parentheses.
@@ -213,13 +212,28 @@ def removeDuplicates(st):
 		return removeDuplicates(tail)
 	else:
 		return head + removeDuplicates(tail)
+		
+def reverseString(st):
+	if st is None:
+		return None
+	if st == "":
+		return st
+	return st[-1] + reverseString(st[:-1])
+
+# Reverse the digits of the integer
+# 12345 -> 54321
+
+def reverseDigits(num):
+	newnum  = 0
+	while num > 0:
+		digit = num % 10
+		num = num // 10
+		newnum = newnum*10 + digit
+	
+	return newnum		
 	
 def main():
-	# print(printAllParens(3))
-	# print(pow(2,5))
-	#dic = ['i', 'like', 'you','what', 'hey']
-	#print(wordBreak('i', dic))
-	print(removeDuplicates("aaaa"))
+	print(reverseDigits(1))
 	
 if __name__ == '__main__':
 	main()

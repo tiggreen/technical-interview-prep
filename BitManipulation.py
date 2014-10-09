@@ -25,14 +25,15 @@ def updateBits(n, m, i, j):
 	#1's after position i
 	right = ((1 << i) -1)
 	
-	#1's with 0's between i and j.
+	#1's, with 0's between i and j.
 	mask = left | right
 	
 	# clear i through j then put m in there
+	
 	return (n & mask) | (m << i)
-	 
+	
 		
 def main():
-	print(updateBits(16, 16, 0,5))
+	print(bin(updateBits(16, 16, 0,5)))
 
 main()

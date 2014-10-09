@@ -65,12 +65,38 @@ def fib(i):
 		return buf[i]
 	buf[i] = fib(i-1) + fib(i-2)
 	return buf[i]	
+	
+	
+	
+"""
+Longest Increasing Subsequence.
 
+{10, 22, 9, 33, 21, 50, 41, 60, 80} is 6 
+and LIS is {10, 22, 33, 50, 60, 80}.
+"""
+def LIS(arr):
+	
+	lis = [1 for i in range(len(arr))]
+	elems = []
+	
+	for i in range(1, len(arr)):
+		for j in range(i):
+			if arr[i] > arr[j] and lis[i] < lis[j] + 1:
+				lis[i] = lis[j] + 1
+	
+	mx = 0
+	for el in lis:
+		if el > mx:
+			mx = el
+			
+			
+	for i in range(len(lis)-1):
+		if lis[i+1] > lis[i]:
+			elems.append(arr[i+1])
+			
+	return (mx, elems)
 	
 def main():
-	#grid = [[3,2,1],[1,1,2],[2,1,1]]
-	#printGrid(grid)
-	#print(getFastestPath(grid))
-	print(fib(100))
+	print(LIS([99, 22, 9, 33, 21, 50, 41, 60, 80]))
 
 main()
