@@ -211,7 +211,7 @@ class Tree():
 		if arr == None:
 			return None
 			
-		middle = len(arr)//2
+		middle = len(arr//2
 		
 		root = TreeNode(arr[middle])
 		root.left = self.creatMinBT(arr[:middle])
