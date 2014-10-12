@@ -119,9 +119,73 @@ def dequeue(qu):
 	# if stack2 is not empty just pop the head and return it.
 	return pop(qu.stack2)
 	
+#The end of Queue implementation
+
+
 """
-The end of Queue implementation
+Find the longest palindrome in a string.
 """
+def isPalindrome(st):
+	if st is None:
+		return None
+	ln = len(st)
+	for i in range(ln//2):
+		if st[i] != st[ln-i-1]:
+			return False
+	return True
+	
+# Finds the longest polindrom in a string. Brute force.
+# O(n3) complexity.
+def longestPalindrome(st):
+	if st is None:
+		return None
+	
+	maxPalindrome = ""
+	for i in range(len(st)):
+		for j in range(1,len(st)+1):
+			if st[i:j] != "":
+				if isPalindrome(st[i:j]):
+					if len(st[i:j]) > len(maxPalindrome):
+						maxPalindrome = st[i:j]
+	return maxPalindrome	
+	
+# We can do this using Dynamic Programming method.
+def longestPalindromeDP(st):
+	if st is None:
+		return None
+	ln = len(st)
+	table = [[ False for j in range(ln)] for i in range(ln)]
+	
+	# all substrins length of 1 are palindrome.
+	maxLength = 1
+	for i in range(ln):
+		table[i][i] = True
+		
+	# check for substring of length 2.
+	start  = 0
+	for i in range(ln-1):
+		if st[i] == st[i+1]:
+			table[i][i+1] = True
+			start = i
+			maxLength = 2
+			
+	# check for lengths greater than 2. k is length of substring
+	for k in range(3,ln+1):
+		for i in range(ln-k+1):
+			# get the ending index of substring from
+			# starting index i and length k
+			j = i + k - 1
+			
+		    # checking for sub-string from i-th index to j-th index 
+			# if st[i+1] to str[j-1] is a palindrome
+			if table[i+1][j-1] and st[i] == st[j]:
+				table[i][j] = True
+				if k > maxLength:
+					start = i
+					maxLength = k
+					
+	return st[start:start+maxLength]
+#End
 
 def main():
 	pass
