@@ -229,7 +229,6 @@ def reverseDigits(num):
 		digit = num % 10
 		num = num // 10
 		newnum = newnum*10 + digit
-	
 	return newnum		
 	
 def main():

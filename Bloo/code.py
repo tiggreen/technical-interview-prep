@@ -1,6 +1,9 @@
 #@tiggreen
 class Node:
 	__slots__ = ('data', 'next')
+
+class DNode:
+	__slots__ = ('data', 'next', 'previous')
 	
 class LinkedList:
 	__slots__ = ('head')
@@ -37,6 +40,13 @@ def createNode(d, n):
 	nd = Node()
 	nd.data = d
 	nd.next = n
+	return nd
+
+def createDNode(d, n, p):
+	nd = DNode()
+	nd.data = d
+	nd.next = n
+	nd.previous = p
 	return nd
 
 def createLinkedList():
@@ -186,6 +196,87 @@ def longestPalindromeDP(st):
 					
 	return st[start:start+maxLength]
 #End
+
+"""
+Find a local minimum in a given array for a given interval.
+We can solve this problem in a linear time but let's try to 
+improve our time performance.
+O(log(n))
+"""
+def findLocalMinimum(arr, start, end):
+	if (end != start + 1):
+		middle = (start + end) // 2
+		print(arr[middle])
+		if ifLocalMinimum(arr, middle):
+			return arr[middle]
+		elif arr[middle] <= arr[middle-1]:
+			# go to the right side
+			return findLocalMinimum(arr, middle, end)
+			# go to the left side and try to find the local minium there
+		else:
+			return findLocalMinimum(arr, start, middle)
+	else:
+		return False
+		
+def ifLocalMinimum(arr, ind):
+	return arr[ind] <= arr[ind-1] and arr[ind] <= arr[ind+1]	
+#end
+
+"""
+Print a givem matrix in spiral order.
+""" 
+def printMatrixSpiral(mx):
+	pass
+# end
+
+"""
+Reverse the digits of the integer
+12345 -> 54321
+"""
+def reverseDigits(num):
+	multiple = 1
+	revNum = 0
+	while num > 0:
+		digit = num % 10
+		num = num // 10
+		revNum = revNum*10 + digit
+		
+	return revNum
+# end
+
+"""
+Delete a node from a doubly linkedList.
+"""
+def removeDNode(lst, rdata):
+	if not lst:
+		return None
+	if lst.head.data == rdata:
+		lst.head = lst.head.next
+		lst.head.previous = None
+		return lst
+	hd = lst.head.next
+	while hd is not None:
+		if hd.data == rdata:
+			hd.previous.next = hd.next
+			hd.next.previous = hd.previous
+		hd = hd.next
+	return hd
+		
+#end
+"""
+Delete a node from a doubly linkedList.
+"""
+def addDNode(lst, ndata):
+	if lst.head is None:
+		lst.head = createDNode(ndata, None, None)
+		return lst
+	hd = lst.head
+	while hd.next is not None:
+		hd = hd.next
+	hd.next = createDNode(ndata, None, hd)
+	return hd
+		
+#end
 
 def main():
 	pass
