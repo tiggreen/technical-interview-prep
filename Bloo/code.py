@@ -278,10 +278,36 @@ def addDNode(lst, ndata):
 		
 #end
 
+"""
+Remove duplicates from a singly linkedList.
+Note: Preferably not using additional memory. 
+"""
+def removeDuplicatesInPlace(lst):
+	if lst is None:
+		return None
+
+	prev = lst.head
+	curr = prev.next
+	while curr is not None:
+		runner = lst.head
+		while runner != curr:
+			if runner.data == curr.data:
+				tmp  = curr.next
+				prev.next = tmp
+				curr = tmp
+				break
+			runner = runner.next
+		
+		if runner == curr:
+			prev = curr
+			curr = curr.next
+
+	return lst
+#end
+
 def main():
 	pass
 	
-
 if __name__ == '__main__':
 	main()
 	
