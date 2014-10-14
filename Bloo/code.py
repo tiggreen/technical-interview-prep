@@ -4,17 +4,24 @@ class Node:
 
 class DNode:
 	__slots__ = ('data', 'next', 'previous')
+
+class TreeNode:
+	__slots__ =  ('data', 'left', 'right')
 	
 class LinkedList:
 	__slots__ = ('head')
 	
 class Stack:
 	__slots__ = ('head')
+	
+class BTree:
+	__slots__ = ('root')
+
 
 def pop(st):
 	if st.head is None:
 		return None
-	dt = st.head.data
+	dt = st.head
 	st.head  = st.head.next
 	return dt 
 
@@ -48,6 +55,13 @@ def createDNode(d, n, p):
 	nd.next = n
 	nd.previous = p
 	return nd
+	
+def createTreeNode(d, l, r):
+	nd = TreeNode()
+	nd.data = d
+	nd.left = l
+	nd.right = r
+	return nd
 
 def createLinkedList():
 	ll = LinkedList()
@@ -58,6 +72,11 @@ def createStack():
 	st = Stack()
 	st.head = None
 	return st
+	
+def createBinaryTree():
+	bt = BTree()
+	bt.root = None
+	return bt
 
 def addNode(lst, nodeData):
 	if lst.head is None:
@@ -103,27 +122,30 @@ Let's implement a queue with two stacks. We'll make dequeue
 operation costly, to be 0(n) and enqueue O(1).
 """
 class Queue:
-	__slots__ = ('stack1', 'stack2')
+	__slots__ = ('stack1', 'stack2', 'size')
 	
 def createQueue():
 	qu = Queue()
 	qu.stack1 = createStack()
 	qu.stack2 = createStack()
+	qu.size = 0
 	return qu
 
 # O(1)
 def enqueue(qu,data):
 	push(qu.stack1, data)
+	qu.size+=1
 	return qu
 # O(n)
 def dequeue(qu):
 	if qu.stack1 is None and qu.stack2 is None:
 		return None
+	qu.size-=1
 	# if stack2 is empty
 	if qu.stack2.head is None:
 		while qu.stack1.head is not None:
 			popDat = pop(qu.stack1)
-			push(qu.stack2, popDat)
+			push(qu.stack2, popDat.data)
 		retData = pop(qu.stack2)
 		return retData
 	# if stack2 is not empty just pop the head and return it.
@@ -305,8 +327,43 @@ def removeDuplicatesInPlace(lst):
 	return lst
 #end
 
+"""
+Print nodes in a binary tree in level order.
+"""
+def addNodeBST(root, data):
+	if root is None:
+		root = createTreeNode(data, None, None)
+	elif data <= root.data:
+		root.left = addNodeBST(root.left, data)
+	else:
+		root.right = addNodeBST(root.right, data)
+	return root
+	
+def printLevelOrder(root):
+	if root is None:
+		return None
+	qu = []
+	qu.append(root)
+	while len(qu) > 0:
+		r = qu.pop(0)
+		print(r.data)
+		if r.left is not None:
+			qu.append(r.left)
+		if r.right is not None:
+			qu.append(r.right)
+#end
 def main():
-	pass
+	# bt = createBinaryTree()
+	root = None
+	root = addNodeBST(root, 10)
+	root = addNodeBST(root, 3)
+	root = addNodeBST(root, 15)
+	root = addNodeBST(root, 2)
+	root = addNodeBST(root, 5)
+	root = addNodeBST(root, 11)
+	root = addNodeBST(root, 18)
+	root = addNodeBST(root, 90)
+	printLevelOrder(root)
 	
 if __name__ == '__main__':
 	main()
