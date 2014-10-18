@@ -352,18 +352,81 @@ def printLevelOrder(root):
 		if r.right is not None:
 			qu.append(r.right)
 #end
+
+"""
+Implement integer square root calculation.
+"""
+
+def squareRoot(n):
+	x = n
+	y = 1
+	e = 0.000001; #e decides the accuracy level
+	while x - y > e:
+		x = (x + y) / 2
+		y = n / x
+	
+	return x
+#end
+
+""""
+Given a binary tree (not a BST), print the nodes at a given level 
+n passed as an input parameter.
+"""
+def printLevel(root, level):
+	if root is None:
+		return
+	if level == 0:
+		print(root.data)
+		return
+	else:
+		printLevel(root.left, level-1)
+		printLevel(root.right, level-1)
+		
+#end
+
+"""
+Find all permutations of the given string.
+"""
+def allPerms(st):
+	if len(st) == 1:
+		return st
+	perms = []
+	for i in range(len(st)):
+		temp = st[:i] + st[i+1:]
+		pms = allPerms(temp)
+		for j in pms:
+			perms.append(st[i] + j)
+	return perms
+		
+#end
+
+"""
+Find all subsets of a set. Powerset!
+"""
+
+def powerSet(s):
+	if s == []:
+		return [[]]
+	else:
+		first = s[0]
+		listCopy = s[:]
+		listCopy.remove(first) #remove the first
+		q = powerSet(listCopy)
+	
+	return q + [x + [first] for x in q]
+	
+#end
+
+def josephusProblem(n,k):
+	p, i, seq = list(range(n)), 0, []
+	while p:
+		# getting the index to kill.
+		i = (i+k-1) % len(p)
+		seq.append(p.pop(i))
+	return 'Prisoner killing order: %s. Survivor: %i' % (', '.join(str(i) for i in seq[:-1]), seq[-1])
+		
 def main():
-	# bt = createBinaryTree()
-	root = None
-	root = addNodeBST(root, 10)
-	root = addNodeBST(root, 3)
-	root = addNodeBST(root, 15)
-	root = addNodeBST(root, 2)
-	root = addNodeBST(root, 5)
-	root = addNodeBST(root, 11)
-	root = addNodeBST(root, 18)
-	root = addNodeBST(root, 90)
-	printLevelOrder(root)
+	print(powerSet(["a", "b", "c"]))
 	
 if __name__ == '__main__':
 	main()
