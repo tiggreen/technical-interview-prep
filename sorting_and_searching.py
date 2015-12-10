@@ -1,27 +1,26 @@
-# Author @tigranhk
+# Author @tiggreen
 
-# mergeSort (has  split and merge utility functions)
-def mergeSort(lst):
-    if not lst:
+def merge_sort(lst):
+    """ sort the given list with merge sort. nlog(n)"""
+    if len(lst) <= 1:
         return lst
-    elif (len(lst) == 1):
-        return lst
-    else:
-        (half1, half2) = split(lst)
-        return merge(mergeSort(half1), mergeSort(half2))
+
+    (half1, half2) = split(lst)
+    return merge(merge_sort(half1), merge_sort(half2))
 
 
-def split(L):
+def split(lst):
     evens = []
     odds = []
-    isEven = True
-    for e in L:
-        if isEven:
+    is_even = True
+    for e in lst:
+        if is_even:
             evens.append(e)
         else:
             odds.append(e)
-        isEven = not isEven
-    return ( evens, odds )
+        is_even = not is_even
+
+    return (evens, odds)
 
 
 def merge(sorted1, sorted2):
@@ -44,26 +43,25 @@ def merge(sorted1, sorted2):
     return result
 
 
-#mergeSort (has partition utility function)
-def quickSort(L):
-    if not L:
-        return L
-    else:
-        pivot = L[0]
-        ( less, same, more ) = partition(pivot, L)
-        return quickSort(less) + same + quickSort(more)
+def quick_sort(lst):
+    if not lst:
+        return lst
+    # take the first element as a pivot
+    pivot = lst[0]
+    (less, same, more) = partition(pivot, lst)
+    return quick_sort(less) + same + quick_sort(more)
 
 
-def partition(pivot, L):
-    ( less, same, more ) = ( [], [], [] )
-    for e in L:
+def partition(pivot, lst):
+    (less, same, more) = ([], [], [])
+    for e in lst:
         if e < pivot:
             less.append(e)
         elif e > pivot:
             more.append(e)
         else:
             same.append(e)
-    return ( less, same, more )
+    return (less, same, more)
 
 
 def main():
@@ -72,5 +70,5 @@ def main():
     print ("QuickSort result: " + str(quickSort(a)))
     print ("MergeSort result: " + str(mergeSort(b)))
 
-
-main()
+if __name__ == '__main__':
+    main()

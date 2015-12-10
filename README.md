@@ -1,4 +1,5 @@
-Code-in-Python-
-===============
+#### Please feel free to submit a pull request and contribute to this project!
 
-This repo will contain all the code I wrote in Python towards my road to technical interviews. Feel free to contribute. 
+#### TODO:
+- Write README
+- Refactor already existing problems
