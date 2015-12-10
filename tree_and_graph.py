@@ -221,3 +221,23 @@ class BinaryTree():
         root.right = self.creat_min_bt(arr[middle+1:])
 
         return root
+
+
+# adjacency list (array of linked list)
+# matrix
+# 
+# a -> b, c, d
+# b -> a, e
+# c -> d
+class Graph(object):
+
+    # dfs
+    def dfs(u):
+        # u.visit()
+        # u.visited = True
+        # for each v vertex where (u, v) is an edge in the graph:
+        #   if (not v.viisted):
+        #       dfs(v)
+
+    def bfs(root):
+        pass

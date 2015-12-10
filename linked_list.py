@@ -229,6 +229,88 @@ def reverseLinkedList(lst):
 
     return lst
 
+def delete(head, position):
+    # corner case
+    if position == 0 and head is not None:
+        return head.next
+
+    curr_index = 0
+    curr = head
+    while curr_index != position - 1:
+        head = head.next
+        curr_index = curr_index + 1
+
+    head.next = head.next.next
+    return curr
+
+def reverse(head):
+    if head is None:
+        return head
+    curr = head
+    prev = None
+    while curr is not None:
+        temp = curr.next
+        curr.next = prev
+        prev = curr
+        curr = temp
+    head = prev
+    return head
+
+def compare_lists(headA, headB):
+    if size(headA) != size(headB):
+        return 0
+    while headA is not None and headB is not None:
+        if headA.data != headB.data:
+            return 0
+        headA = headA.next
+        headB = headB.next
+    return 1
+
+def size(head):
+    if head is None:
+        return 0
+    size = 0
+    while head is not None:
+        size = size + 1
+        head = head.next
+
+    return size
+
+def return_kth_to_last_node(head, k):
+    if head is None:
+        return None
+
+    p1 = head
+    p2 = head
+    cnt = 1
+    while p1 is not None:
+        p1 = p1.next
+        cnt = cnt + 1
+        if cnt >= k:
+            p2 = p2.next
+
+    return p2
+
+# m->a->d->a->m
+def is_palindrome(head):
+    if head is None:
+        return None
+
+    fast = head
+    slow = head
+    while fast.next is not None
+        fast = fast.next.next
+        slow = slow.next
+
+    # at this point slow is in the middle
+    # and fast is on the last node
+    runner = head
+    while slow is not None:
+        if runner.data == slow.data:
+            slow = slow.next
+            runner = runner.next
+        else:
+            return False
 
 def main():
     l = mkLinkedList()

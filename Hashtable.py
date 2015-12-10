@@ -1,95 +1,41 @@
-"""
-author @tiggreen 
+ class Node(object):
 
-Hashtable implementation.
-"""
-# [[] for i in range(size)] craetes array of arrays
-class Entry():
-    def __init__(self, key, value):
-        self.key = key
-        self.value = value
+   def __init__(self, data=None, next_node=None):
+       self.data = data
+       self.next = next_node
 
+class Bucket(object):
+    """Hashtable is an array of buckets"""
+    def __init__(self, head=None):
+        self.head = head
+        self.size = 0
 
-class Hashtable():
-    # number of entries in the hashtable.
-    entries = 0
-    # the size of the hash table.
-    size = 0
-    # hashtable is a list of entry lists.
-    hashtable = []
+class HashTable(object):
+    """Hashtable Data Structure"""
 
-    def __init__(self, size):
-        self.size = size
-        self.hashtable = [[] for i in range(size)]
+    size = 1024
+    # each bucket of the hash table is a linked list
+    buckets = [Bucket() for i in range(size)]
 
-    """
-    Probably this is the worst possible hash function ever.
-    Think about a better hash function to avoid many collisions.
-    """
+    # hash the key and return the index of the busket
+    def hash(self, key):
+        ord_sum = 0
+        for s in key:
+            ord_sum = ord_sum + ord(s)
+        return  ord_sum % self.size
 
-    def str2Int(self, st):
-        sm = 0
-        for s in st:
-            sm += ord(s)
-        return sm
-
-    def hashf(self, key):
-        v = self.str2Int(key)
-        return v % self.size
-
-    """
-    Returns the value of the entry with the given key.
-    If the value is not in the hashtable then returns False.
-    """
-
-    def get(self, key):
-        bucketId = self.hashf(key)
-        # this returns a list of entries.
-        entryList = self.hashtable[bucketId]
-        for e in entryList:
-            if e.key == key:
-                return e.value
-        return False
-
-
-    """
-    We want to create an entry object and store it in the hashtable.
-    """
-
-    def put(self, key, value):
-        entry = Entry(key, value)
-        bucketId = self.hashf(key)
-        entryList = self.hashtable[bucketId]
-        entryList.append(entry)
-
-    """
-    Searches to find the value with the given key. It could be a list of values.
-    if it doesn't exist it returns False, otherwise it returns the
-    value.
-    """
 
     def search(self, key):
+        index = self.hash(key)
+        bucket = self.buckets[index]
 
-        bucketId = self.hashf(key)
-        result = []
-
-        if self.hashtable[bucketId] != []:
-            entryList = self.hashtable[bucketId]
-            for e in entryList:
-                result.append(e.value)
-            return result
+        if bucket is not None:
+            return bucket.head.data
         else:
-            return False
+            return None
 
+    def insert(key):
+        pass
 
-def main():
-    ht = Hashtable(256)
-    ht.put("Tigran", 25)
-    ht.put("Tigran", 40)
-    ht.put("Ani", 10)
-    # print(ht.get("Tigran"))
-    print(ht.search("Tigran"))
-
-#print(ht.hashtable)
-
-main()
+    def delete(key):
+        pass
