@@ -1,22 +1,22 @@
 # @tiggreen
 # Some random moderate and hard problems.
 
-
-def decToBinary(n):
+def decimal_to_binary(n):
     """
     Converts the decimal (10 based) number to a binary number
-    decToBinary(8) => 1000
+    decimal_to_binary(8) => 1000
     """
-    ret = list()
-    while (n > 1):
+    binary_list = []
+    while n > 1:
         if n % 2 == 0:
-            ret.insert(0,0)
+            binary_list.insert(0,0)
         else:
-            ret.insert(0,1)
-        n = n//2
+            binary_list.insert(0,1)
+        n = n // 2
 
-    ret.insert(0,1)
-    return ret
+    binary_list.insert(0,1)
+    return binary_list
+
 
 def reverse_words_in_place(str):
     if len(str.split()) == 1:
@@ -25,61 +25,59 @@ def reverse_words_in_place(str):
 
 
 # [1, 2, 3], [4, 5, 6, 7] ==> [1, 2, 3, 4, 5, 6, 7]
-def mergeSortedLists(lst1,lst2):
+def merge_sorted_lists(lst1,lst2):
     #let's check if one of them is empty
-    if (len(lst1) == 0):
+    if not lst1:
          return lst2
-    if (len(lst2) == 0):
+    if not lst2:
          return lst1
 
     i = 0
     j = 0
     # idealy we want to have len(lst1) + len(lst2) size list
-    resultList = []
-    while (i < len(lst1) and j < len(lst2)):
-        if (lst1[i] < lst2[j]):
-            resultList.append(lst1[i])
+    sorted_merged_list = []
+    while i < len(lst1) and j < len(lst2):
+        if lst1[i] < lst2[j]:
+            sorted_merged_list.append(lst1[i])
             i+=1
         else:
-            resultList.append(lst2[j])
+            sorted_merged_list.append(lst2[j])
             j+=1
 
+    # there might be some leftover elements in lists so let's
+    # check it out.
     while i < len(lst1):
-        resultList.append(lst1[i])
+        sorted_merged_list.append(lst1[i])
         i+=1
     while j < len(lst2):
-        resultList.append(lst2[j])
+        sorted_merged_list.append(lst2[j])
         j+=1
 
-    return resultList
-    # there might be some leftover elements in lists so let's
-    # check it out. 
-    
-# let's try to find the data in the given list.  
-# Returns true if we can find the data.
-def binarySearchRec(lst, data):
-    if lst == []:
+    return sorted_merged_list
+
+def binary_search_recursive(lst, data):
+    if not lst:
         return False
-        
-    midInd = len(lst)//2
-    
-    if lst[midInd] == data:
+
+    mid_index = len(lst) // 2
+
+    if lst[mid_index] == data:
         return True
-    if data < lst[midInd]:
-        return binarySearchRec(lst[:midInd], data)
-    elif data > lst[midInd]:
-        return binarySearchRec(lst[midInd+1:], data)
+    if data < lst[mid_index]:
+        return binary_search_recursive(lst[:mid_index], data)
+    elif data > lst[mid_index]:
+        return binary_search_recursive(lst[mid_index+1:], data)
 
-"""
-Returns all the permutations of the string.
-E.g. "abc" => "abc", "acb", "bac", "bca", "cab", "cba" 
-"""
 
-def getAllPermutations(st):
+def get_all_permutations(st):
+    """
+    Return all the permutations of the string.
+    E.g. "abc" => "abc", "acb", "bac", "bca", "cab", "cba" 
+    """
     perms = []
-    if st == None:
+    if st is None:
         return st
-    # the base case. 
+    # the base case.
     if len(st) == 0:
         perms.append('')
         return perms
@@ -87,35 +85,47 @@ def getAllPermutations(st):
         first = st[0]
         remainder = st[1:]
 
-        words = getAllPermutations(remainder)
+        words = get_all_permutations(remainder)
         for w in words:
             for i in range(len(w)+1):
-                perms.append(insertCharAt(w, first,i))
+                perms.append(insert_char_at(w,first,i))
         return perms
 
-def insertCharAt(st, f, pos):
+def insert_char_at(st, f, pos):
     result = st[:pos] + f + st[pos:]
     return result
 
 # ls = [a,b] => [[], a, b, [a,b]]
-def getPowerSet(ls):
-    allSubsets = []
+def get_power_set(ls):
+    all_subsets = []
     sz = 1 << len(ls)
     for counter in range(sz):
-        tempSubset  = []
+        temp_subset  = []
         for j in range(len(ls)):
             if (counter & 1 << j) > 0:
-                tempSubset.append(ls[j])
-        allSubsets.append(tempSubset)
-    return allSubsets
-    
-"""
-Finding pair of numbers in a list that add to given sum.
-a = [1,3,4,6,12,16,19, 10]
-findPairSum(a, 28) => (12,16)
-key : sum - x, value y
-"""
-def findPairSum(lst, sm):
+                temp_subset.append(ls[j])
+        all_subsets.append(temp_subset)
+    return all_subsets
+
+
+def get_power_set_better(lst):
+    if s == []:
+        return [[]]
+
+    first = s[0]
+    remainder = s[1:]
+    q = get_power_set_better(remainder)
+
+    return q + [x + [first] for x in q]
+
+
+def find_pair_sum(lst, sm):
+    """
+    Finding pair of numbers in a list that add to given sum.
+    a = [1,3,4,6,12,16,19, 10]
+    findPairSum(a, 28) => (12,16)
+    key : sum - x, value y
+    """
     if not lst:
         return lst
     d = dict()
@@ -126,77 +136,63 @@ def findPairSum(lst, sm):
         else:
             key = sm - i
             result.append((key,i))
-            
+
     return result
 
-def getAllPerms(st):
-    perms = []
-    
-    if st == '':
-        perms.append('')
-        return perms 
-    
-    firstChars = st[:-1]
-    lastChar = st[-1]
-    allPerms = getAllPerms(firstChars)
-    
-    for s in allPerms:
-        for i in range(len(s) + 1):
-            temp = insertCharAt(s, lastChar, i)
-            perms.append(temp)
-    print(perms)            
-    return perms
 
-# Print all valid combinations of n-pairs of parentheses.
-def printAllParens(cnt):
+def print_all_parens(cnt):
+    """Print all valid combinations of n-pairs of parentheses."""
     st = ['' for i in range(cnt*2)]
-    return printAllParensUtil(cnt, cnt, 0, st)
-    
-def printAllParensUtil(left, right, cnt, st):
-    
+    return print_all_parens_util(cnt, cnt, 0, st)
+
+def print_all_parens_util(left, right, cnt, st):
     if left < 0 or left > right:
-        return 
+        return
+
     if left == 0 and right == 0:
         print(st)
     else:
         if left > 0:
             st[cnt] = '('
-            printAllParensUtil(left-1, right, cnt+1, st)
-            
+            print_all_parens_util(left-1, right, cnt+1, st)
         if right > left:
             st[cnt] = ')'
-            printAllParensUtil(left, right-1, cnt+1, st)
+            print_all_parens_util(left, right-1, cnt+1, st)
 
-#Calculate x raised to the power n */
+
 def pow(x,n):
+    """ calculate x raised to the power n """
     if n == 0:
         return 1
     elif n % 2 == 0:
         return pow(x, n//2)*pow(x, n//2)
     else:
         return x*pow(x, n//2)*pow(x, n//2)
-        
-"""
-Given an input string and a dictionary of words, find out if
-the input string can be segmented into a space-separated sequence of 
-dictionary words. See following examples for more details.
-"""
-def wordBreak(st, dic):
+
+
+def word_break(st, dic):
+    """
+    Given an input string and a dictionary of words, find out if
+    the input string can be segmented into a space-separated sequence of 
+    dictionary words. See following examples for more details.
+    """
     #base case
     if len(st) == 0:
         return True
     for i in range(1,len(st) + 1):
-        if st[0:i] in dic and wordBreak(st[i:len(st)-i], dic):
+        if st[0:i] in dic and word_break(st[i:len(st)-i], dic):
             return True
     return False
 
-"""
-"abcdbfa" => "cdbfa" (do this in place)
-Q: Do we want to remove first occurance chars or the second, or next?
-"""
-def removeDuplicates(st):
+
+def remove_duplicate_chars_from_string(st):
+    """
+    "abcdbfa" => "cdbfa" (do this in place)
+    Q: Do we want to remove first occurance chars or the second, or next?
+    """
     if st == None:
         return None
+
     # let this be the base case
     if st == "":
         return st
@@ -204,30 +200,33 @@ def removeDuplicates(st):
     head = st[0]
     tail = st[1:]
     if head in tail:
-        return removeDuplicates(tail)
+        return remove_duplicate_chars_from_string(tail)
     else:
-        return head + removeDuplicates(tail)
+        return head + remove_duplicate_chars_from_string(tail)
 
-def reverseString(st):
+
+def reverse_string(st):
     if st is None:
         return None
     if st == "":
         return st
-    return st[-1] + reverseString(st[:-1])
+    return st[-1] + reverse_string(st[:-1])
 
-# Reverse the digits of the integer
-# 12345 -> 54321
 
-def reverseDigits(num):
+def reverse_digits(num):
+    """
+    Reverse the digits of an integer
+    12345 -> 54321
+    """
     newnum  = 0
     while num > 0:
         digit = num % 10
         num = num // 10
         newnum = newnum*10 + digit
     return newnum       
-    
+
 def main():
-    print(reverseDigits(1))
-    
+    print(reverse_digits(1))
+
 if __name__ == '__main__':
     main()

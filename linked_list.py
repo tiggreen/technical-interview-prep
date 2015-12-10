@@ -1,15 +1,17 @@
-"""
-author @tiggreen 
+# author @tiggreen
 
-Single LinkedList class with its methods.
+# Single LinkedList class with its methods.
 
-It's always great to code all data structures from scratch.
-We start from LinkedList as it's the most common data structure
-to be asked during tech inteviews. 
+# It's always great to code all data structures from scratch.
+# We start from LinkedList as it's the most common data structure
+# to be asked during tech inteviews. 
 
-"""
-from Node import *
-from DNode import *
+ class Node(object):
+    """A Node class"""
+
+   def __init__(self, data=None, next_node=None):
+       self.data = data
+       self.next = next_node
 
 
 class LinkedList():
@@ -18,22 +20,13 @@ class LinkedList():
     Must be accessed via class name. Or self.__class__.size.
     """
 
+    def __init__(self, head):
+        self.head = head
+        self.size = 0
+
     @classmethod
-    def getSize(cls):
+    def size(cls):
         print("The linkedlist has {} nodes.".format(cls.size))
-
-    __slots__ = ('head', 'size')
-
-# def __init__(self, head, size):
-# head = EmptyNode()
-# 	size = 0
-
-
-def mkLinkedList():
-    ll = LinkedList()
-    ll.head = mkEmptyNode()
-    ll.size = 0
-    return ll
 
 
 # append
@@ -154,7 +147,8 @@ def removeDuplicates(lst):
         curr = curr.next
     return res
 
-def removeDuplInPlace(lst):
+#1 -> 2 -> 2-> 3 -> 2 -> 5 => 1 -> 2 -> 3 -> 2 -> 5
+def remove_duplcates_inplace(lst):
 	
 	if isinstance(lst.head, EmptyNode):
 		return lst
@@ -179,55 +173,20 @@ def removeDuplInPlace(lst):
 		
 
 #1 -> 2 -> 2-> 3 -> 2 -> 5 => 1 -> 2 -> 3 -> 2 -> 5
-def removeSeqDuplInplace(lst):
-	if lst == None:
+def remove_duplcates_inplace(lst):
+	if lst is None:
 		return None
-	
+
 	prev = lst.head
 	curr = prev.next
-	
-	while not isinstance(curr, EmptyNode):
-		
+
+	while curr is not None:
 		while curr.data == prev.data:
 			curr = curr.next
-		
 		prev = curr.next
 		curr = curr.next
-		
+
 	return lst
-	
-	
-	
-def removeNthLast(lst, n):
-    pnt1 = lst.head
-    pnt2 = lst.head
-    currPos = 0
-    while not isinstance(pnt1.next, EmptyNode):
-        pnt1 = pnt1.next
-        currPos += 1
-        #please note that this should be >= not ==.
-        if currPos >= n:
-            pnt2 = pnt2.next
-    print("The node that should be removed has a data {}.".format(pnt2.data))
-    return lst
-
-
-def reverseLinkedList(lst):
-    if isinstance(lst.head, EmptyNode):
-        return lst
-
-    curr = lst.head
-    prev = mkEmptyNode()
-
-    while not isinstance(curr, EmptyNode):
-        temp = curr.next
-        curr.next = prev
-        prev = curr
-        curr = temp
-
-    lst.head = prev
-
-    return lst
 
 def delete(head, position):
     # corner case
@@ -312,20 +271,5 @@ def is_palindrome(head):
         else:
             return False
 
-def main():
-    l = mkLinkedList()
-    append(l, 3)
-    append(l, 4)
-    append(l, 4)
-    append(l, 3)
-    append(l, 10)
-
-    ls = removeSeqDuplInplace(l)
-    printList(ls)
-
-#this can be handy when you want to import this module. 
-# So in case if you import main won't be imported. 
-if __name__ == "__main__":
-    main()
 
 
