@@ -136,13 +136,38 @@ def reverse_words_in_place(sentence):
 
     return last + " " + reverse_words_in_place(first)
 
+
+# [-2, -3, 4, -1, -2, 1, 5, -3] => 7
+def largest_sum_contiguous_subarray(arr):
+    # corner case
+    if arr is None:
+        return None
+
+    max_so_far = 0
+    max_ending_here = 0
+    for i in arr:
+        max_ending_here = max_ending_here + i
+        if max_ending_here < 0:
+            max_ending_here = 0
+        elif max_so_far < max_ending_here:
+            max_so_far = max_ending_here
+
+    return max_so_far
+
+# Python program to find maximum contiguous subarray
+# Dynammic programming approach
+def largest_sum_contiguous_subarray_dp(arr):
+    max_so_far = arr[0]
+    curr_max = arr[0]
+    for i in range(1, len(arr)):
+        curr_max = max(arr[i], curr_max + arr[i])
+        max_so_far = max(max_so_far, curr_max)
+
+    return max_so_far
+
 def main():
-    str1 = sys.stdin.read()
-    str2 = sys.stdin.read()
-    if isAnagramArr(str1, str2):
-        sys.stdout.write("Anagrams!")
-    else:
-        sys.stdout.write("Not anagrams!")
+    print(largest_sum_contiguous_subarray_dp([-2, -3, 4, -1, -2, 1, 5, -3]))
+
 
 if __name__ == "__main__":
     main()

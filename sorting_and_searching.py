@@ -44,6 +44,7 @@ def merge(sorted1, sorted2):
 
 
 def quick_sort(lst):
+    """ sort the given list quick sort. nlog(n)"""
     if not lst:
         return lst
     # take the first element as a pivot
@@ -65,10 +66,10 @@ def partition(pivot, lst):
 
 
 def main():
-    a = [1, 5, 55, 7, 10, 8, 0, 3, 1, 2, 2, 0, 12, 33, 18]
+    a = [1, 5, 55, 7, 10, 8, 0, 3, 1, 2, 2, 12, 33, 18]
     b = [1, 6, 3, 4, 12, 55, 33, 33, 44, 17, 16]
-    print ("QuickSort result: " + str(quickSort(a)))
-    print ("MergeSort result: " + str(mergeSort(b)))
+    print ("Quick Sort result: " + str(quick_sort(a)))
+    print ("Merge Sort result: " + str(merge_sort(b)))
 
 if __name__ == '__main__':
     main()

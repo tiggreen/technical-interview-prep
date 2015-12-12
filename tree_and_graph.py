@@ -202,9 +202,9 @@ class BinaryTree():
 
         print(root.data)
         root.visited = True
-        for each n node that is root.adjacent:
-            if n.is_visited == False:
-                dfs(n)
+        # for each n node that is root.adjacent:
+        #     if n.is_visited == False:
+        #         dfs(n)
 
     def creat_min_bt(self, arr):
         """
@@ -229,10 +229,23 @@ class BinaryTree():
 # a -> b, c, d
 # b -> a, e
 # c -> d
+class Node(object):
+
+    def __init__(self, name, children=[]):
+        self.data = data
+        self.children = children
+
 class Graph(object):
+    """
+    Graph is a list of VertexNode lists.
+    """
+    def __init__(self, nodes=[]):
+        # node is list of Node objects
+        self.nodes = nodes
 
     # dfs
     def dfs(u):
+        pass
         # u.visit()
         # u.visited = True
         # for each v vertex where (u, v) is an edge in the graph:
